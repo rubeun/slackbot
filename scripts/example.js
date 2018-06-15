@@ -12,20 +12,20 @@
 
 module.exports = function(robot) {
 
-  // let annoyIntervalId, answer, enterReplies, leaveReplies, lulz;
-  // robot.hear(/badger/i, function(res) {
-  //   return res.send("Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS");
-  // });
+  let annoyIntervalId, answer, enterReplies, leaveReplies, lulz;
+  robot.hear(/badger/i, function(res) {
+    return res.send("Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS");
+  });
 
-  // robot.respond(/open the (.*) doors/i, function(res) {
-  //   let doorType;
-  //   doorType = res.match[1];
-  //   if (doorType === "pod bay") {
-  //     return res.reply("I'm afraid I can't let you do that.");
-  //   } else {
-  //     return res.reply("Opening " + doorType + " doors");
-  //   }
-  // });
+  robot.respond(/open the (.*) doors/i, function(res) {
+    let doorType;
+    doorType = res.match[1];
+    if (doorType === "pod bay") {
+      return res.reply("I'm afraid I can't let you do that.");
+    } else {
+      return res.reply("Opening " + doorType + " doors");
+    }
+  });
 
   // robot.hear(/I like pie/i, function(res) {
   //   return res.emote("makes a freshly baked pie");
