@@ -12,19 +12,27 @@
 
 module.exports = function(robot) {
 
-  let annoyIntervalId, answer, enterReplies, leaveReplies, lulz;
-  robot.hear(/badger/i, function(res) {
-    return res.send("Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS");
+  // let annoyIntervalId, answer, enterReplies, leaveReplies, lulz;
+  // robot.hear(/badger/i, function(res) {
+  //   return res.send("Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS");
+  // });
+
+  // robot.respond(/open the (.*) doors/i, function(res) {
+  //   let doorType;
+  //   doorType = res.match[1];
+  //   if (doorType === "pod bay") {
+  //     return res.reply("I'm afraid I can't let you do that.");
+  //   } else {
+  //     return res.reply("Opening " + doorType + " doors");
+  //   }
+  // });
+
+  robot.respond(/what is your name/i, function(res) {
+    return res.reply("Hi! My name is...what?...my name is...who?...my name is...wikkawikkawik...Slim Shady");
   });
 
-  robot.respond(/open the (.*) doors/i, function(res) {
-    let doorType;
-    doorType = res.match[1];
-    if (doorType === "pod bay") {
-      return res.reply("I'm afraid I can't let you do that.");
-    } else {
-      return res.reply("Opening " + doorType + " doors");
-    }
+  robot.hear(/who let the dogs out/i, function(res) {
+    return res.reply("Who! Who! Who! Who!");
   });
 
   // robot.hear(/I like pie/i, function(res) {
