@@ -27,6 +27,18 @@ module.exports = function(robot) {
   //   }
   // });
 
+  robot.hear(/I like the colour (.*)/i, function(res) {
+    let colour;
+    colour = res.match[1];
+    if (colour === "black") {
+      return res.reply("It matches everything!");
+    } else if (colour === "red") {
+      return res.reply("The colour of the blood of your enemies!");
+    } else {
+      return res.reply("What kind of loser likes " + colour + "???");      
+    }
+  });
+
   robot.respond(/what is your name/i, function(res) {
     return res.reply("Hi! My name is...what?...my name is...who?...my name is...wikkawikkawik...Slim Shady");
   });
