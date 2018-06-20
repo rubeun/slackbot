@@ -31,11 +31,11 @@ module.exports = function(robot) {
     let colour;
     colour = res.match[1];
     if (colour === "black") {
-      return res.reply("It matches everything!");
+      return res.send("It matches everything!");
     } else if (colour === "red") {
-      return res.reply("The colour of the blood of your enemies!");
+      return res.send("The colour of the blood of your enemies!");
     } else {
-      return res.reply("What kind of loser likes " + colour + "???");      
+      return res.send("What kind of loser likes " + colour + "???");      
     }
   });
 
@@ -44,7 +44,7 @@ module.exports = function(robot) {
   });
 
   robot.hear(/who let the dogs out/i, function(res) {
-    return res.reply("Who! Who! Who! Who!");
+    return res.send("Who! Who! Who! Who!");
   });
 
   // robot.hear(/I like pie/i, function(res) {
