@@ -32,7 +32,8 @@ module.exports = function(robot) {
 
   // BART MAP - displays map of BART stations and lines
   robot.hear(/bart map/i, function(msg){
-    return msg.send("https://www.bart.gov/sites/all/themes/bart_desktop/img/system-map.gif");
+    let bartMap = "https://www.bart.gov/sites/all/themes/bart_desktop/img/system-map.gif";
+    return msg.send(msg.bartMap);
   });
 
   // BART CODES - lists all 4 letter station codes needed to display arrival times of specific stations
@@ -101,28 +102,38 @@ module.exports = function(robot) {
       return msg.http(bartAPI).get()(function(err, res, body){
         let error, json;
         try {
-          let stationName, nextTrains = "";
+          let stationName, trainDirection = "", nextTrains = "";
           json = JSON.parse(body);
           stationName = json.root.station[0].name;
           
           // Get all arriving trains from all lines
           if (command === "arrivals") {
             json.root.station[0].etd.forEach(function(train){
-              nextTrains += train.estimate[0].color + " Line: " + train.destination + " in ";
+              if (train.estimate[0].direction === "North") {
+                trainDirection = "Northbound";
+              } else {
+                trainDirection = "Southbound";
+              }
+              nextTrains += trainDirection + " " + train.estimate[0].color + " Line: *" + train.destination + "* in ";
               train.estimate.forEach(function(times){
-                nextTrains += times.minutes + " minutes(" + times.length + " cars) ";
+                nextTrains += "*" + times.minutes + " minutes*(" + times.length + " cars) ";
               });
               nextTrains += "\n"
             });
           // Get only the next train for all lines  
           } else {
             json.root.station[0].etd.forEach(function(train){
-              nextTrains += train.estimate[0].color + " Line: " + train.destination + " in " + train.estimate[0].minutes + " minutes(" + train.estimate[0].length + " cars)\n";
+              if (train.estimate[0].direction === "North") {
+                trainDirection = "Northbound";
+              } else {
+                trainDirection = "Southbound";
+              }
+              nextTrains += trainDirection + " " + train.estimate[0].color + " Line: *" + train.destination + "* in *" + train.estimate[0].minutes + " minutes*(" + train.estimate[0].length + " cars)\n";
               
             });    
           }
           // output all information. #youredone
-          return msg.send("\nBART Station: " + stationName + "\n" + "Next arriving trains as of " + json.root.time + ":\n```" + nextTrains + "```");
+          return msg.send("\nBART Station: *" + stationName + "*\n" + "Next arriving trains as of " + json.root.time + ":\n```" + nextTrains + "```");
  
         // Error Handling
         } catch(_error) {
