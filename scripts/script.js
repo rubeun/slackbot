@@ -23,11 +23,11 @@ module.exports = function(robot) {
   // BART HELP - gives usage instructions
   robot.hear(/bart help/i, function(msg){
     let helpInfo = `\nUsage:\n
-      bart map -> Show a map of BART stations & lines\n
-      bart codes -> Show a full list of the 4 letter BART station codes\n
-      bart arrivals <station code> - > List all arriving trains to BART station corresponding to <station code> (e.g. bart arrivals mont)\n
-      bart next <station code> -> List only the next train from each line (e.g. bart next mont)\n`;
-      msg.send(helpInfo);
+    bart map -> Show a map of BART stations & lines\n
+    bart codes -> Show a full list of the 4 letter BART station codes\n
+    bart arrivals <station code> - > List all arriving trains to BART station corresponding to <station code> (e.g. bart arrivals mont)\n
+    bart next <station code> -> List only the next train from each line (e.g. bart next mont)\n`;
+    msg.send(helpInfo);
   });
 
   // BART MAP - displays map of BART stations and lines
@@ -122,7 +122,7 @@ module.exports = function(robot) {
             });    
           }
           // output all information. #youredone
-          return msg.send("\nBART Station: " + stationName + "\n" + "Next arriving trains as of " + json.root.time + ":\n" + nextTrains);
+          return msg.send("\nBART Station: " + stationName + "\n" + "Next arriving trains as of " + json.root.time + ":\n```" + nextTrains + "```");
  
         // Error Handling
         } catch(_error) {
