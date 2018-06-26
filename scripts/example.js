@@ -27,25 +27,25 @@ module.exports = function(robot) {
   //   }
   // });
 
-  robot.hear(/I like the colour (.*)/i, function(res) {
-    let colour;
-    colour = res.match[1];
-    if (colour === "black") {
-      return res.send("It matches everything!");
-    } else if (colour === "red") {
-      return res.send("The colour of the blood of your enemies!");
-    } else {
-      return res.send("What kind of loser likes " + colour + "???");      
-    }
-  });
+  // robot.hear(/I like the colour (.*)/i, function(res) {
+  //   let colour;
+  //   colour = res.match[1];
+  //   if (colour === "black") {
+  //     return res.send("It matches everything!");
+  //   } else if (colour === "red") {
+  //     return res.send("The colour of the blood of your enemies!");
+  //   } else {
+  //     return res.send("What kind of loser likes " + colour + "???");      
+  //   }
+  // });
 
-  robot.respond(/what is your name/i, function(res) {
-    return res.reply("Hi! My name is...what?...my name is...who?...my name is...wikkawikkawik...Slim Shady");
-  });
+  // robot.respond(/what is your name/i, function(res) {
+  //   return res.reply("Hi! My name is...what?...my name is...who?...my name is...wikkawikkawik...Slim Shady");
+  // });
 
-  robot.hear(/who let the dogs out/i, function(res) {
-    return res.send("Who! Who! Who! Who!");
-  });
+  // robot.hear(/who let the dogs out/i, function(res) {
+  //   return res.send("Who! Who! Who! Who!");
+  // });
 
   // robot.hear(/I like pie/i, function(res) {
   //   return res.emote("makes a freshly baked pie");
