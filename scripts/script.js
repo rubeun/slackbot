@@ -33,7 +33,7 @@ module.exports = function(robot) {
   // BART MAP - displays map of BART stations and lines
   robot.hear(/bart map/i, function(msg){
     let bartMap = "https://www.bart.gov/sites/all/themes/bart_desktop/img/system-map.gif";
-    return msg.send(msg.bartMap);
+    return msg.send(bartMap);
   });
 
   // BART CODES - lists all 4 letter station codes needed to display arrival times of specific stations
@@ -114,9 +114,9 @@ module.exports = function(robot) {
               } else {
                 trainDirection = "Southbound";
               }
-              nextTrains += trainDirection + " " + train.estimate[0].color + " Line: *" + train.destination + "* in ";
+              nextTrains += trainDirection + " " + train.estimate[0].color.toLowerCase() + " Line: *" + train.destination + "* in ";
               train.estimate.forEach(function(times){
-                nextTrains += "*" + times.minutes + " minutes*(" + times.length + " cars) ";
+                nextTrains += times.minutes + " minutes(" + times.length + " cars) ";
               });
               nextTrains += "\n"
             });
@@ -128,7 +128,7 @@ module.exports = function(robot) {
               } else {
                 trainDirection = "Southbound";
               }
-              nextTrains += trainDirection + " " + train.estimate[0].color + " Line: *" + train.destination + "* in *" + train.estimate[0].minutes + " minutes*(" + train.estimate[0].length + " cars)\n";
+              nextTrains += trainDirection + " " + train.estimate[0].color.toLowerCase() + " Line: *" + train.destination + "* in " + train.estimate[0].minutes + " minutes(" + train.estimate[0].length + " cars)\n";
               
             });    
           }
