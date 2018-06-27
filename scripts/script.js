@@ -19,6 +19,8 @@
 // Date: June 25th 2018
 
 module.exports = function(robot) {
+  // API key for BART's API
+  const API_KEY = "MW9S-E7SL-26DU-VV8V";
 
   // BART HELP - gives usage instructions
   robot.hear(/bart help/i, function(msg){
@@ -96,7 +98,7 @@ module.exports = function(robot) {
     // ONLY proceed if command is either arrivals or next, else exit
     if ((command === "arrivals") | (command === "next")) {
       let stationCode = escape(msg.match[2]);
-      let bartAPI = "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + stationCode + "&key=MW9S-E7SL-26DU-VV8V&json=y";
+      let bartAPI = "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" + stationCode + "&key=" + API_KEY + "&json=y";
 
       // call BART API
       return msg.http(bartAPI).get()(function(err, res, body){
@@ -106,21 +108,24 @@ module.exports = function(robot) {
           json = JSON.parse(body);
           stationName = json.root.station[0].name;
           
-          // Get all arriving trains from all lines
+          // Arrivals - Get all arriving trains from all lines
           if (command === "arrivals") {
             json.root.station[0].etd.forEach(function(train){
+              // make a note of train direction for each train
               if (train.estimate[0].direction === "North") {
                 trainDirection = "Northbound";
               } else {
                 trainDirection = "Southbound";
               }
+              // populate nextTrains with train direction, line colour, train destination, how many minutes until it arrives and how many cars in the train
               nextTrains += trainDirection + " " + train.estimate[0].color.toLowerCase() + " Line: *" + train.destination + "* in ";
+              // loop through all the arrival times and their corresponding number of cars 
               train.estimate.forEach(function(times){
                 nextTrains += times.minutes + " minutes(" + times.length + " cars) ";
               });
               nextTrains += "\n"
             });
-          // Get only the next train for all lines  
+          // Next - Get only the next train for all lines  
           } else {
             json.root.station[0].etd.forEach(function(train){
               if (train.estimate[0].direction === "North") {
@@ -128,6 +133,7 @@ module.exports = function(robot) {
               } else {
                 trainDirection = "Southbound";
               }
+              // populate nextTrains with train direction, line colour, train destination, how many minutes until it arrives and how many cars in the train
               nextTrains += trainDirection + " " + train.estimate[0].color.toLowerCase() + " Line: *" + train.destination + "* in " + train.estimate[0].minutes + " minutes(" + train.estimate[0].length + " cars)\n";
               
             });    
@@ -142,12 +148,12 @@ module.exports = function(robot) {
           //return msg.send("ErrorMsg: " + error);
         }
       });
-    // ignore if invalid command (not arrivals or next). 
+    // Exit - ignore if command is neither arrivals or next. 
     } else {
       return;
     };
 
 
-  });      
+  }); // !End bart arrivals/next     
 
 }
