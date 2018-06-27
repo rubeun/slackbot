@@ -1,15 +1,15 @@
-# BART Slack Chat Bot
-# Description: A chat bot for Slack using Hubot. Used to get the latest live train arrival times for a specified BART station
-#               using BART's API. Also provides 
-# Usage:
-#   bart help                       - show you how to use the bart chatbot
-#   bart map                        - displays a map of BART stations and lines
-#   bart codes                      - displays all the 4 letter station code and their corresponding station names
-#   bart arrivals <station code>    - displays all the arriving trains corresponding to the BART station code specified
-#   bart next <station code>        - displays only the next arriving train for each line corresponding to the BART station code
-#
-# Author: Rubeun Tan
-# Date: June 25th 2018
+# BART Train Arrivals Slack Chat Bot
+Description: A chat bot for Slack using Hubot. Used to get the latest live train arrival times for a specified BART station
+               using BART's API. Also provides 
+ Usage:
+   bart help                       - show you how to use the bart chatbot
+   bart map                        - displays a map of BART stations and lines
+   bart codes                      - displays all the 4 letter station code and their corresponding station names
+   bart arrivals <station code>    - displays all the arriving trains corresponding to the BART station code specified
+   bart next <station code>        - displays only the next arriving train for each line corresponding to the BART station code
+
+ Author: Rubeun Tan
+ Date: June 25th 2018
 
 
 
