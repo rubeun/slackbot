@@ -20,7 +20,7 @@
 
 module.exports = function(robot) {
   // API key for BART's API
-  const API_KEY = "MW9S-E7SL-26DU-VV8V";
+  const API_KEY = "";
 
   // BART HELP - gives usage instructions
   robot.hear(/bart help/i, function(msg){
